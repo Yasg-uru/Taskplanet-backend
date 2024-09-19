@@ -16,3 +16,17 @@ export const createUser = async (req, res, next) => {
     });
   }
 };
+
+export const GetUsers=async (req,res,next)=>{
+  try {
+    const users=await usermodel.find({});
+    res.status(200).json({
+      message :"Users fetched successfully",
+      users
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server Error",
+    });
+  }
+}
