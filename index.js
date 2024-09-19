@@ -9,10 +9,14 @@ import cors from "cors";
 config();
 const app = express();
 const server = http.createServer(app);
-app.use(cors({origin:["http://localhost:5173","https://taskplanet-frontend.vercel.app"]}))
-export const io = new Server(server, {
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://taskplanet-frontend.vercel.app"],
+  })
+);
+const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173","https://taskplanet-frontend.vercel.app"],
+    origin: ["http://localhost:5173", "https://taskplanet-frontend.vercel.app"],
     methods: ["GET", "POST"],
   },
 });
@@ -20,15 +24,18 @@ const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use("/user", userRouter);
-
-connectDB();
-// server.listen(PORT, () => {
-//   console.log(`Taskplanet server is running on port : ${PORT}`);
-// });
-export default server;
 io.on("connection", (socket) => {
   console.log("A user connected");
+  socket.on("claim", () => {
+    console.log("Claim event is emmited");
+    io.emit("leaderboard-update");
+  });
   socket.on("disconnect", () => {
     console.log("A user disconnected");
   });
 });
+connectDB();
+server.listen(PORT, () => {
+  console.log(`Taskplanet server is running on port : ${PORT}`);
+});
+// export default server;

@@ -1,5 +1,5 @@
 import usermodel from "../model/user.model.js";
-import { io } from "../index.js";
+
 export const createUser = async (req, res, next) => {
   try {
     const { name } = req.body;
@@ -41,7 +41,7 @@ export const UserClaim = async (req, res, next) => {
     const user = await usermodel.findById(userId);
     if (user) {
       user.points += points;
-      io.emit("leaderboard-update");
+      // io.emit("leaderboard-update");
       await user.save();
       res.json({ user, points });
     } else {
