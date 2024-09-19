@@ -35,7 +35,7 @@ io.on("connection", (socket) => {
   });
 });
 connectDB();
-// server.listen(PORT, () => {
-//   console.log(`Taskplanet server is running on port : ${PORT}`);
-// });
-export default server;
+server.listen(PORT, () => {
+  console.log(`Taskplanet server is running on port : ${PORT}`);
+});
+// export default server;
