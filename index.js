@@ -25,6 +25,7 @@ connectDB();
 server.listen(PORT, () => {
   console.log(`Taskplanet server is running on port : ${PORT}`);
 });
+export default server;
 io.on("connection", (socket) => {
   console.log("A user connected");
   socket.on("disconnect", () => {
