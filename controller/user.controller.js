@@ -20,6 +20,7 @@ export const createUser = async (req, res, next) => {
 
 export const GetUsers = async (req, res, next) => {
   try {
+    console.log("request from frontend");
     const users = await usermodel.find({});
     res.status(200).json({
       message: "Users fetched successfully",
@@ -33,9 +34,10 @@ export const GetUsers = async (req, res, next) => {
 };
 export const UserClaim = async (req, res, next) => {
   try {
-    const { userId } = req.params;
-    const points = Math.floor(Math.random() * 10) + 1;
+    const { userId } = req.body;
 
+    const points = Math.floor(Math.random() * 10) + 1;
+    console.log("this is a user id:", userId);
     const user = await usermodel.findById(userId);
     if (user) {
       user.points += points;
