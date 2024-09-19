@@ -22,9 +22,9 @@ app.use(express.json());
 app.use("/user", userRouter);
 
 connectDB();
-server.listen(PORT, () => {
-  console.log(`Taskplanet server is running on port : ${PORT}`);
-});
+// server.listen(PORT, () => {
+//   console.log(`Taskplanet server is running on port : ${PORT}`);
+// });
 export default server;
 io.on("connection", (socket) => {
   console.log("A user connected");
